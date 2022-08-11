@@ -30,11 +30,11 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.TEXT,//cant ilimitada de caracteres para imagenes
-      allowNull: false
+      allowNull: true
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: true
     }
   },
