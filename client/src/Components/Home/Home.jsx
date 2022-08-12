@@ -17,8 +17,9 @@ import {
   getTemperamentFilter,
   getABCOrder,
   getCBAOrder,
-  getWeightMinOrder,
-  getWeightMaxOrder,
+  orderByWeight,
+  // getWeightMinOrder,
+  // getWeightMaxOrder,
   getOrderByCreation,
 } from "../../redux/actions";
 
@@ -27,24 +28,23 @@ import {
 export default function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
+  const dogAllTemperaments = useSelector((state) => state.AllTemperaments);
   const loading = useSelector((state) => state.loading);
-  const dogallTemperaments = useSelector((state) => state.AllTemperaments);
 
-  const [order, setOrder] = useState("");
+  //--------------------------- PAGINADO/ESTADO ---------------------------------
 
-  //----------------------------- PAGINADO ---------------------------------
+  // const [order, setOrder] = useState("");
+  // const [page, setPage] = useState(1);
+  // const [dogsxPage, setDogsxPage] = useState(8);
+  // const indice = page * dogsxPage;
 
-  const [page, setPage] = useState(1);
-  const [dogsxPage, setDogsxPage] = useState(8);
-  const indice = page * dogsxPage;
+  // const indiceFinal = indice - dogsxPage;
 
-  const indiceFinal = indice - dogsxPage;
+  // const currentPage = allDogs.slice(indiceFinal, indice);
 
-  const currentPage = allDogs.slice(indiceFinal, indice);
-
-  const pagina = (numPage) => {
-    setPage(numPage);
-  };
+  // const pagina = (numPage) => {
+  //   setPage(numPage);
+  // };
 
   //---------------------------- REACT/HOOKS -------------------------------
 
@@ -56,23 +56,30 @@ export default function Home() {
   function handleTemperamentFilter(e) {
     e.preventDefault();
     dispatch(getTemperamentFilter(e.target.value));
-    setPage(1);
-    setOrder(e.target.value);
+    // setPage(1);
+    // setOrder(e.target.value);
   }
 
   function handleAlphabetOrder(e){ 
-    if(e.target.value === "ABC"){
+    if(e.target.value === "Asc"){
         e.preventDefault ();
-        dispatch (getABCOrder(e.target.value));
-        setPage (1);
-        setOrder (e.target.value)
-    }else if(e.target.value === "CBA"){
+        dispatch(getABCOrder(e.target.value));
+        // setPage (1);
+        // setOrder (e.target.value)
+    }else if(e.target.value === "Desc"){
         e.preventDefault ();
-        dispatch (getCBAOrder(e.target.value));
-        setPage (1);
-        setOrder (e.target.value)       
+        dispatch(getCBAOrder(e.target.value));
+        // setPage (1);
+        // setOrder (e.target.value)       
     }
 }
+
+function handleOrderByWeight(e) {
+  e.preventDefault();
+  dispatch(orderByWeight(e.target.value));
+  // setOrder(e.target.value);
+  // setPage (1);
+};
 
   // function handleWeightOrder(e) {
   //     e.preventDefault()
@@ -81,24 +88,24 @@ export default function Home() {
   //     setOrder(e.target.value)
   // }
 
-  function handleWeightOrder(e) {
-    if (e.target.value === "Min") {
-      e.preventDefault();
-      dispatch(getWeightMinOrder(e.target.value));
-      setPage(1);
-      setOrder(e.target.value);
-    } else if (e.target.value === "Max") {
-      e.preventDefault();
-      dispatch(getWeightMaxOrder(e.target.value));
-      setPage(1);
-      setOrder(e.target.value);
-  }
+  // function handleWeightOrder(e) {
+  //   if (e.target.value === "Min") {
+  //     e.preventDefault();
+  //     dispatch(getWeightMinOrder(e.target.value));
+  //     setPage(1);
+  //     setOrder(e.target.value);
+  //   } else if (e.target.value === "Max") {
+  //     e.preventDefault();
+  //     dispatch(getWeightMaxOrder(e.target.value));
+  //     setPage(1);
+  //     setOrder(e.target.value);
+  // }
 
   function handleOrderByCreation(e) {
     e.preventDefault();
     dispatch(getOrderByCreation(e.target.value));
-    setPage(1);
-    setOrder(e.target.value);
+    // setPage(1);
+    // setOrder(e.target.value);
   }
 
   function handleClick(e) {
@@ -107,7 +114,6 @@ export default function Home() {
   }
 
   //------------------------------ RENDER/HOME -----------------------------
-
 
   
   return (
@@ -137,52 +143,35 @@ export default function Home() {
                 </Link>
               </li>
               <li>
-                <select
-                  onChange={(e) => {
-                    handleTemperamentFilter(e);
-                  }}
-                  className="navFilter"
-                >
-                  <option value={"all"}>All Temperaments</option>
-                  {dogallTemperaments?.map((e) => {
-                    return (
-                      <option key={e.id} value={e.name}>
-                        {e.name}
-                      </option>
-                    );
-                  })}
+                <select onChange={(e) => {handleTemperamentFilter(e)}} className="navFilter">
+                    <option value="all">Temperament filter</option>
+                        {dogAllTemperaments?.map((e) => (
+                    <option value={e.name} key={e.id}>{e.name}</option> 
+                    ))}
                 </select>
               </li>
               <li>
                 <select
                   key="alphaOrder"
-                  onChange={(e) => handleAlphabetOrder(e)}
-                  className="navFilter"
-                >
+                  onChange={(e) => handleAlphabetOrder(e)} className="navFilter">
                   <option value={"allApi"}>Alphabet order</option>
-                  <option value={"ABC"}>A to Z</option>
-                  <option value={"CBA"}>Z to A</option>
+                  <option value={"Asc"}>A to Z</option>
+                  <option value={"Desc"}>Z to A</option>
                 </select>
               </li>
               <li>
                 <select
-                  onChange={(e) => handleWeightOrder(e)}
-                  className="navFilter"
-                >
-                  <option value="selected" hidden>
-                    Weight filter
-                  </option>
-                  <option value="Min">Heavy-Light</option>
-                  <option value="Max">Light-Heavy</option>
+                  onChange={(e) => handleOrderByWeight(e)} className="navFilter">
+                  <option value="selected" hidden>Weight filter</option>
+                  <option value="Asc">Heavy-Light</option>
+                  <option value="Desc">Light-Heavy</option>
                 </select>
               </li>
               <li>
                 <select
-                  onChange={(e) => handleOrderByCreation(e)}
-                  className="navFilter"
-                >
-                  <option value="all">Origin filter</option>
-                  <option value="api">DogsFromApi</option>
+                  onChange={(e) => handleOrderByCreation(e)} className="navFilter">
+                  <option value={"all"}>All Dogs</option>
+                  <option value={"api"}>DogsFromApi</option>
                   <option value="created">DogsFromDb</option>
                 </select>
               </li>
@@ -193,11 +182,11 @@ export default function Home() {
             <div className="clear"></div>
           </nav>
 
-          <Pagination
+          {/* <Pagination
             dogsxPage={dogsxPage}
             allDogs={allDogs.length}
             pagina={pagina}
-          />
+          /> */}
 
           {allDogs?.length ? (
             allDogs?.map((e) => {
@@ -234,4 +223,134 @@ export default function Home() {
     </div>
   );
 }
-}
+
+
+
+
+
+  
+//   return (
+//     <div>
+//       {loading ? (
+//         <div className="loading">
+//           <img className="loadingImg" src={loadingGif} alt="not found" />
+//         </div>
+//       ) : (
+//         <div>
+//           <nav id="nav">
+//             <h1 id="homeTittle">DOGS</h1>
+//             <ul>
+//               <li>
+//                 <button
+//                   className="btnStyle1"
+//                   onClick={(e) => {
+//                     handleClick(e);
+//                   }}
+//                 >
+//                   Refresh
+//                 </button>
+//               </li>
+//               <li>
+//                 <Link to="/dogs">
+//                   <button id="create">Create a new Dog</button>
+//                 </Link>
+//               </li>
+//               <li>
+//                 <select
+//                   onChange={(e) => {
+//                     handleTemperamentFilter(e);
+//                   }}
+//                   className="navFilter"
+//                 >
+//                   <option value={"all"}>All Temperaments</option>
+//                   {dogallTemperaments?.map((e) => {
+//                     return (
+//                       <option key={e.id} value={e.name}>
+//                         {e.name}
+//                       </option>
+//                     );
+//                   })}
+//                 </select>
+//               </li>
+//               <li>
+//                 <select
+//                   key="alphaOrder"
+//                   onChange={(e) => handleAlphabetOrder(e)}
+//                   className="navFilter"
+//                 >
+//                   <option value={"allApi"}>Alphabet order</option>
+//                   <option value={"ABC"}>A to Z</option>
+//                   <option value={"CBA"}>Z to A</option>
+//                 </select>
+//               </li>
+//               <li>
+//                 <select
+//                   onChange={(e) => handleWeightOrder(e)}
+//                   className="navFilter"
+//                 >
+//                   <option value="selected" hidden>
+//                     Weight filter
+//                   </option>
+//                   <option value="Min">Heavy-Light</option>
+//                   <option value="Max">Light-Heavy</option>
+//                 </select>
+//               </li>
+//               <li>
+//                 <select
+//                   onChange={(e) => handleOrderByCreation(e)}
+//                   className="navFilter"
+//                 >
+//                   <option value="all">Origin filter</option>
+//                   <option value="api">DogsFromApi</option>
+//                   <option value="created">DogsFromDb</option>
+//                 </select>
+//               </li>
+//               <li>
+//                 <SearchBar />
+//               </li>
+//             </ul>
+//             <div className="clear"></div>
+//           </nav>
+
+//           <Pagination
+//             dogsxPage={dogsxPage}
+//             allDogs={allDogs.length}
+//             pagina={pagina}
+//           />
+
+//           {allDogs?.length ? (
+//             allDogs?.map((e) => {
+//               return (
+//                 <div>
+//                   <Link to={`/dogs/${e.id}`}>
+//                     <Dog
+//                       name={e.name}
+//                       image={e.image}
+//                       temperaments={e.temperament}
+//                       id={e.id}
+//                       weight={e.weight}
+//                     />
+//                   </Link>
+//                 </div>
+//               );
+//             })
+//           ) : (
+//             <div className="noFoundError">
+//               <h1 className="dogNotFound">The Dog has not been found</h1>
+//               <img className="notFound" src={notfound} alt="notfound" />
+//               <button
+//                 className="btnStyle2"
+//                 onClick={(e) => {
+//                   handleClick(e);
+//                 }}
+//               >
+//                 Back
+//               </button>
+//             </div>
+//           )}
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+// }

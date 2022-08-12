@@ -1,14 +1,10 @@
 
 const axios = require ("axios");
-// export const GET_ALL_DOGS = "GET_ALL_DOGS";
-// export const GET_DOGS_BY_NAME = "GET_DOGS_BY_NAME";
-// export const GET_DOGS_TEMPERAMENT = "GET_DOGS_TEMPERAMENT";
-// export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 
 //---------------------------- RUTAS ------------------------------
 
 const RUTA_GET = "http://localhost:3001/dogs";
-const RUTA_GET_TEMPERAMENT = "http://localhost:3001/temperaments/";
+const RUTA_GET_TEMPERAMENT = "http://localhost:3001/temperaments";
 const RUTA_POST = "http://localhost:3001/dogs/create";
 
 //------------------------ RENDER/HOME ------------------------------
@@ -184,23 +180,23 @@ export function getDogDetail(id) {
         }
     }
 
-//--------------------- RENDER/WEIGHTMAX/ORDER -------------------------
+// //--------------------- RENDER/WEIGHTMAX/ORDER -------------------------
 
-    export function getWeightMaxOrder(payload) {
-        return {
-            type: "GET_WEIGHTMAX_ORDERED",
-            payload,
-        }
-    }
+//     export function getWeightMaxOrder(payload) {
+//         return {
+//             type: "GET_WEIGHTMAX_ORDERED",
+//             payload,
+//         }
+//     }
 
 //--------------------- RENDER/WEIGHTMIN/ORDER -------------------------
 
-    export const getWeightMinOrder = (payload) => {
-        return {
-            type: "GET_WEIGHTMIN_ORDERED",
-            payload
-        }
-}
+//     export const getWeightMinOrder = (payload) => {
+//         return {
+//             type: "GET_WEIGHTMIN_ORDERED",
+//             payload
+//         }
+// }
 
 //--------------------- RENDER/CREATION/ORDER --------------------------
 
@@ -227,3 +223,10 @@ export function deleteDog(id) {
         }
     }
 }
+
+export function orderByWeight(payload) {
+    return {
+      type: "ORDER_BY_WEIGHT",
+      payload,
+    };
+  }

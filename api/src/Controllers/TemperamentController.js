@@ -23,7 +23,7 @@ const getAllTemperament = async (req, res) => {
                     name: temp
                 }
             })
-            console.log(isCreated)
+            //console.log(isCreated)
         })
 
         const temperamentsDb = await Temperament.findAll()

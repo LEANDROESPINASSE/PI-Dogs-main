@@ -12,7 +12,8 @@ const createDog = async (req, res) => {
             weight: `${weightMin.trim()} - ${weightMax.trim()}`,
             height,
             image,
-            lifeSpan
+            lifeSpan,
+            createdInDb
         })
 
         let temperamentDb = await Temperament.findAll({

@@ -31,14 +31,32 @@ function rootReducer(state = initialState, action) {
 
         case "GET_TEMPERAMENT_FILTERED":
 
-            const filterTemp = state.allDogs.filter(dog => {
-                if (!dog.temperaments) return undefined;
-                return dog.temperaments.includes(action.payload)
-            })
+            const allDogs = state.allDogs
+            const filtered = action.payload === 'all' ? allDogs 
+            : allDogs.filter(e => { 
+                if (e.temperament) {
+                    return e.temperament.includes(action.payload);
+                } else if (e.temperaments) {
+                    let temps = e.temperaments.map(e => e.name);
+                    return temps.includes(action.payload);
+                }
+                return true;
+            });
+
             return {
                 ...state,
-                dogs: filterTemp
-            }
+                dogs: filtered
+            };
+
+
+            // const filterTemp = state.allDogs.filter(dog => {
+            //     if (!dog.temperaments) return undefined;
+            //     return dog.temperaments.includes(action.payload)
+            // })
+            // return {
+            //     ...state,
+            //     dogs: filterTemp
+            // }-------------------------------------------
 
         // const newDog = state.allDogs.filter(e => e.temperaments);
         // const newDogFiltered = newDog.filter(e => {
@@ -100,37 +118,55 @@ function rootReducer(state = initialState, action) {
         //         dogs: orderedWeight
         //     }
 
-        case "GET_WEIGHTMIN_ORDERED":
+        // case "GET_WEIGHTMIN_ORDERED":
             
-            let resultsMin = state.allDogs.sort((a,b) => parseInt(a.weight.split(" - ")[0]) - parseInt(b.weight.split(" - ")[0]))
-            let resultmin1 = resultsMin.sort((a,b)=> {
-                if (parseInt(a.weight.split(" - ")[0]) === parseInt(b.weight.split(" - ")[0])) {
+        //     let weightMini = state.allDogs.sort((a,b) => parseInt(a.weight.split(" - ")[0]) - parseInt(b.weight.split(" - ")[0]))
+        //     let weightMin = weightMini.sort((a,b)=> {
+        //         if (parseInt(a.weight.split(" - ")[0]) === parseInt(b.weight.split(" - ")[0])) {
+        //             return parseInt(a.weight.split(" - ")[1]) - parseInt(b.weight.split(" - ")[1])
+        //         } else return 0;
+        //     } )
+        //         return {
+        //             ...state,
+        //             races: weightMin 
+        //         }
 
-                    return parseInt(a.weight.split(" - ")[1]) - parseInt(b.weight.split(" - ")[1])
-                } else return 0;
-            } )
+        // case "GET_WEIGHTMAX_ORDERED":
 
-                return {
-                    ...state,
-                    races: resultmin1 
-                }
-            case "GET_WEIGHTMAX_ORDERED":
+        //         let weightMaxi = state.allDogs.sort((a,b) => parseInt(b.weight.split(" - ")[0]) - parseInt(a.weight.split(" - ")[0]))
+        //         let weightMax = weightMaxi.sort((a,b)=> {
+        //         if (parseInt(b.weight.split(" - ")[0]) === parseInt(a.weight.split(" - ")[0])) {
+        //             return parseInt(b.weight.split(" - ")[1]) - parseInt(a.weight.split(" - ")[1])
+        //         } else return 0;
+        //     } )
+        //         return {
+        //             ...state,
+        //             dogs: weightMax
+        //         };
 
-                let resultsMax = state.allDogs.sort((a,b) => parseInt(b.weight.split(" - ")[0]) - parseInt(a.weight.split(" - ")[0]))
-                let resultMax1 = resultsMax.sort((a,b)=> {
-                if (parseInt(b.weight.split(" - ")[0]) === parseInt(a.weight.split(" - ")[0])) {
-                    console.log (resultMax1)
-                    return parseInt(b.weight.split(" - ")[1]) - parseInt(a.weight.split(" - ")[1])
-                } else return 0;
-            } )
+        case 'ORDER_BY_WEIGHT':
+            const allWeights = state.allDogs;
+            const orderedWeights = 
+            action.payload === 'Asc'? allWeights.sort(function(a, b) {
+                if (a.weight > b.weight) return 1;
+                if (a.weight < b.weight) return -1;
+                return 0;
+            })
+            : action.payload === 'Desc'? allWeights.sort(function(a, b) {
+                if (a.weight > b.weight) return -1;
+                if (a.weight < b.weight) return 1;
+                return 0;
+            })
+            : allWeights
 
-                return {
-                    ...state,
-                    dogs: resultMax1
-                };
+            return {
+                ...state,
+                dogs: orderedWeights
+            };
 
-            case "GET_ORDER_BY_CREATION":
-                const creationOrder = action.payload === "Created" ? state.allDogs.filter(e => e.createdInDb) : state.allDogs.filter(el => !el.createdInDb)
+
+        case "GET_ORDER_BY_CREATION":
+                const creationOrder = action.payload === "Created" ? state.allDogs.filter(e => e.createdInDb) : state.allDogs.filter(element => !element.createdInDb)
                     return {
                         ...state,
                         dogs: creationOrder
@@ -143,7 +179,6 @@ function rootReducer(state = initialState, action) {
             }
 
         case "GET_DOG_DETAIL":
-            console.log(action.payload, "action.payload")
             return {
                 ...state,
                 dogDetail: action.payload
@@ -159,7 +194,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
             }
         default: 
-        return state
+        return {...state}
     }
 }
 
