@@ -2,7 +2,7 @@ const initialState = {
     loading: false,
     dogs: [],
     allDogs: [],
-    AllTemperaments: [],
+    allTemperaments: [],
     dogDetail: []
 }
 
@@ -36,8 +36,8 @@ function rootReducer(state = initialState, action) {
             : allDogs.filter(e => { 
                 if (e.temperament) {
                     return e.temperament.includes(action.payload);
-                } else if (e.temperaments) {
-                    let temps = e.temperaments.map(e => e.name);
+                } else if (e.temperament) {
+                    let temps = e.temperament.map(e => e.name);
                     return temps.includes(action.payload);
                 }
                 return true;
@@ -184,15 +184,11 @@ function rootReducer(state = initialState, action) {
                 dogDetail: action.payload
             }
 
-        case "CREATE_DOG":
-            return {
-                ...state,
-            }
-
         case "DELETE_DOG":
             return {
                 ...state,
             }
+            
         default: 
         return {...state}
     }

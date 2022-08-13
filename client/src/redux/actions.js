@@ -69,6 +69,7 @@ export function getDogByName(name) {
 
 export function createDog(payload) {
     return async function (dispatch) {
+        console.log(payload)
         try {
             const createDog = await axios.post(RUTA_POST, payload)
         return dispatch({

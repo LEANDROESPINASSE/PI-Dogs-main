@@ -15,7 +15,7 @@ import defaultImage from "../Detail/Style/defaultDog.jpg";
 export default function Dog({
     name,
     image,
-    temperaments,
+    temperament,
     weight
 }) {
   return (
@@ -26,8 +26,8 @@ export default function Dog({
       ) : (
         <img id="cardImg" src={defaultImage} alt="dogImg" />
       )}
-      {temperaments ? (
-        <h4 id="h4">Temperament: {temperaments}</h4>
+      {temperament ? (
+        <h4 id="h4">Temperament: {temperament}</h4>
       ) : (
         <h4>Not temperament found</h4>
       )}

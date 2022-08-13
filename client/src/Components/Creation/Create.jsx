@@ -12,7 +12,7 @@ function validation(input) {
     }
 
     else if(!isNaN(input.name)) {
-        errors.name = "Race of the dob must be in letters"
+        errors.name = "Race of the dog must be in letters"
     } 
 
     else if(!input.weightMax) {
@@ -31,13 +31,13 @@ function validation(input) {
         errors.weightMin = "Min weight of the dog is a must"
     }
 
+    else if(input.weightMin <= 0) {
+        errors.weightMin = "Your dog cant be less than 0 Kg"
+    }
+
     else if(isNaN(parseInt(input.weightMin))) {
         errors.weightMin = "Min weight of a dog must be a number"
     }
-
-    else if(input.weightMin > 0) {
-        errors.weightMin = "Just the soul of a dog can be 0 kg"
-    } 
 
     else if(input.weightMin > input.weightMax) {
         errors.weightMin = "Min weight cant be greater than Max weight"
@@ -63,9 +63,9 @@ function validation(input) {
         errors.heightMin = "Min height of a dog must be a number"
     }
 
-    else if(input.heightMin > 0) {
-        errors.heightMin = "Your dog is not a worm"
-    }
+    // else if(input.heightMin > 0) {
+    //     errors.heightMin = "Your dog is not a worm"
+    // }
 
     else if(input.heightMin > input.heightMax) {
         errors.heightMin = "Min height cant be greater than Max height"
@@ -79,11 +79,11 @@ function validation(input) {
         errors.lifeSpanMax = "Max span life of a dog must be a number"
     }
 
-    else if(input.lifeSpanMax > 0) {
+    else if(input.lifeSpanMax <= 0) {
         errors.lifeSpanMax = "Your dog has more life span than 0 years"
     }
 
-    else if(input.lifeSpanMax < 22) {
+    else if(input.lifeSpanMax > 22) {
         errors.lifeSpanMax = "Your dog cant have more life span than Pebbles"
     }
 
@@ -103,8 +103,12 @@ function validation(input) {
         errors.lifeSpanMin = "Min span life of a dog must be a number"
     }
 
-    else if(input.lifeSpanMin > 0) {
+    else if(input.lifeSpanMin <= 0) {
         errors.lifeSpanMin = "Your dog has more life span"
+    }
+
+    else if(!/(https?:\/\/.*\.(?:png))/i.test(input.image)){
+        errors.image = 'El formato debe ser ".png".'
     }
 
     return errors
@@ -113,7 +117,7 @@ function validation(input) {
 export default function CreateDog() {
 
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const navigate = useNavigate()
     const allTemperament = useSelector((state) => state.allTemperaments)
     const [ errors, setErrors ] = useState({})
     const [ input, setInput ] = useState({
@@ -125,7 +129,7 @@ export default function CreateDog() {
         lifeSpanMax: "",
         lifeSpanMin: "",
         image: "",
-        temperaments: []
+        temperament: []
     })
 
     useEffect(() => {
@@ -133,6 +137,7 @@ export default function CreateDog() {
     }, [dispatch])
 
     function handleChange(e) {
+        e.preventDefault ();
         setInput({
             ...input,
             [e.target.name]: e.target.value,
@@ -146,11 +151,11 @@ export default function CreateDog() {
     function handleSelect(e) {
         setInput({
             ...input,
-            temperaments: [...input.temperaments, e.target.value]
+            temperament: [...input.temperament, e.target.value]
         })
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e)  {
         e.preventDefault() 
         if(Object.values(errors).length >0) {
             alert("Please may you fill the form correctly")
@@ -162,7 +167,7 @@ export default function CreateDog() {
             input.heightMin === "",
             input.lifeSpanMax === "",
             input.lifeSpanMin === "",
-            input.temperaments.length === 0
+            input.temperament.length === 0
         ) {
             alert("Please complete correctly the form")
         } else if(!input.image) {
@@ -179,15 +184,15 @@ export default function CreateDog() {
             lifeSpanMax: "",
             lifeSpanMin: "",
             image: "",
-            temperaments: []
+            temperament: []
         })
-        history.push("/home")
+        navigate("/home")
         }
 
         function handleDelete(event) {
             setInput({
                 ...input,
-                temperaments: input.temperaments.filter(e => e !== event)
+                temperament: input.temperament.filter(e => e !== event)
             })
         }
 
@@ -247,6 +252,13 @@ export default function CreateDog() {
                     )}
                 </li>
                 <li>
+                    <label>Upload an image for your Dog</label>
+                    <input type="text" value={input.image} name="image" onChange={e => handleChange(e)} />
+                    {errors.image && (
+                        <p className="error">{errors.image}</p>
+                    )}
+                </li>
+                <li>
                     <select onChange={e => handleSelect(e)} id="temp">
                         <option value="selected" hidden>Temperaments</option>
                         {allTemperament?.sort(function(a, b){
@@ -261,7 +273,7 @@ export default function CreateDog() {
                     </select>
                 </li>
                 <li>
-                    {input.temperaments.map(element =>
+                    {input.temperament.map(element =>
                     <div>
                         <h5>
                             {element}

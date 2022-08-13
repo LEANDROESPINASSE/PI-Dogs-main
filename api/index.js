@@ -17,12 +17,43 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+
+const { getApiDogs } = require("./src/Controllers/DogsController");
+const server = require("./src/app.js");
+const { Temperament } = require("./src/db.js")
+const { conn } = require("./src/db.js");
+
+const ulTemp = async () => {
+  try {
+    const apiTemperaments = await getApiDogs();
+
+    let temperamentapi = apiTemperaments
+      .map((element) => element.temperament?.split(","))
+      .flat(); // element.temperament)
+
+    temperamentapi.forEach(async (temp) => {
+      if (!temp) return;
+      const [createdTemp, isCreated] = await Temperament.findOrCreate({
+        where: {
+          name: temp,
+        },
+        defaults: {
+          name: temp,
+        },
+      });
+      console.log(isCreated);
+    });
+    return
+  } catch (error) {
+    console.log("Temperament creation Error", error);
+  }
+};
 
 // Syncing all the models at once.
+
 conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    ulTemp();
   });
 });

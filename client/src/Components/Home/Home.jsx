@@ -28,7 +28,7 @@ import {
 export default function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
-  const dogAllTemperaments = useSelector((state) => state.AllTemperaments);
+  const dogAllTemperaments = useSelector((state) => state.allTemperaments);
   const loading = useSelector((state) => state.loading);
 
   //--------------------------- PAGINADO/ESTADO ---------------------------------
@@ -138,7 +138,7 @@ function handleOrderByWeight(e) {
                 </button>
               </li>
               <li>
-                <Link to="/dogs">
+                <Link to="/create">
                   <button id="create">Create a new Dog</button>
                 </Link>
               </li>
@@ -196,7 +196,7 @@ function handleOrderByWeight(e) {
                     <Dog
                       name={e.name}
                       image={e.image}
-                      temperaments={e.temperament}
+                      temperament={e.temperament}
                       id={e.id}
                       weight={e.weight}
                     />
