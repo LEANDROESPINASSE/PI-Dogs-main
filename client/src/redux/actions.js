@@ -42,7 +42,7 @@ export function getDogByName(name) {
     return async function(dispatch) {
         try {
             const dogsByName = await axios.get(
-                `${RUTA_GET}/?name=${name}`)
+                `${RUTA_GET}?name=${name}`)
             return dispatch({
                 type: "GET_DOGS_BY_NAME",
                 payload: dogsByName.data

@@ -5,7 +5,6 @@ const { getApiDogs } = require("./DogsController")
 
 const getAllTemperament = async (req, res) => {
 
-
     try {
         
         const apiTemperaments = await getApiDogs();

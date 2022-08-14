@@ -1,0 +1,12 @@
+.logo{
+    background-image:url("https://i.gifer.com/origin/06/06a9785ca406640e95229e359ebded0f.gif");
+    background-repeat:no-repeat;
+    background-color: transparent;
+    height:100px;
+    width: 100px;
+    background-size: 115px 100px;
+    background-position:center;
+    cursor: pointer;
+    border: none;
+
+}

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogByName } from "../../redux/actions"
 
-export default function SearchDog() {
+export default function SearchBar() {
     const dispatch = useDispatch();
     const [ name, setName ] = useState("");
 
@@ -22,8 +22,8 @@ export default function SearchDog() {
     return (
         <div className="search">
             <div>
-                <input className="input" type="text" placeholder="Find a Dog" onChange={(e) => handleOnChange(e)} />
-                <button className="button" type="submit" onClick={(e) => onSubmit(e)}>Search</button>
+                <input className="input" value={name}type="text" placeholder="Find a Dog" onChange={(e) => handleOnChange(e)} />
+                <button className="search" type="submit" onClick={(e) => onSubmit(e)}>Search</button>
             </div>
         </div>
     )

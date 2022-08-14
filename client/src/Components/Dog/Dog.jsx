@@ -33,7 +33,7 @@ export default function Dog({
       )}
       {weight ? (
       <h4 id="h4">
-        weight: {weight}
+        weight between: {weight} Kg
       </h4>
       ) : (
       <h4>Weight Not found</h4>

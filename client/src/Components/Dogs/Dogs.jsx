@@ -30,7 +30,7 @@ export default function Dogs() {
 
   //paginado
   const [currentPage, setCurrentPage] = useState(1);
-  const[dogsPerPage, setCardsPerPag ] = useState (8);
+  const[dogsPerPage, setCardsPerPag ] = useState (10);
   const indexOfLastCards = currentPage * dogsPerPage;
   const indexOfFirstCards = indexOfLastCards - dogsPerPage;
   const currentDetails = cardState.slice(indexOfFirstCards,indexOfLastCards)
@@ -39,7 +39,6 @@ export default function Dogs() {
     setCurrentPage(pagNumber)
 }
   
-
 useEffect(() => {
   dispatch(getAllDogs());
 }, [dispatch]);

@@ -1,0 +1,12 @@
+.about {
+        border: none;
+        text-shadow: 0px 0px 20px black;
+        align-items: center;
+        margin-right: 2000px;
+        margin-left: 70px;
+        margin-top: 20px;
+        width:200px;
+        font-size: 20px;
+        background-color: transparent;
+        cursor: pointer;
+}

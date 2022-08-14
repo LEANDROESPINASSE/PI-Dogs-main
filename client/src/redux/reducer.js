@@ -166,11 +166,12 @@ function rootReducer(state = initialState, action) {
 
 
         case "GET_ORDER_BY_CREATION":
-                const creationOrder = action.payload === "Created" ? state.allDogs.filter(e => e.createdInDb) : state.allDogs.filter(element => !element.createdInDb)
-                    return {
-                        ...state,
-                        dogs: creationOrder
-                    }
+            
+            const creationOrder = action.payload === "Created" ? state.allDogs.filter(e => e.createdInDb) : state.allDogs.filter(element => !element.createdInDb)
+                return {
+                    ...state,
+                    dogs: creationOrder
+                }
 
         case "GET_DOGS_BY_NAME":
             return {

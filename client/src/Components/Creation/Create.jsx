@@ -59,7 +59,7 @@ function validation(input) {
         errors.heightMin = "Min height of the dog is a must"
     }
 
-    else if(input.heightMin >= 0) {
+    else if(input.heightMin <= 0) {
         errors.heightMin = "Your dog cant be less than 0 Cm"
     }
 

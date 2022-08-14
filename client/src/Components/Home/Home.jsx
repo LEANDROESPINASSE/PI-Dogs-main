@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/SearchBar";
 //import Pagination from "../Pagination/Pagination";
 import Dogs from "../Dogs/Dogs";
 import Logo from "../Logo/Logo";
-//import About from "../About/About";
+
 
 //-------------------------- ACTIONS/IMPORT -----------------------------
 
@@ -47,8 +47,15 @@ const [page, setPage] = useState(1);
   function handleTemperamentFilter(e) {
     e.preventDefault();
     dispatch(getTemperamentFilter(e.target.value));
-    setPage(1);
-    setOrder(e.target.value);
+    //setPage(1);
+    //setOrder(e.target.value);
+  }
+  
+  function handleOrderByCreation(e) {
+    e.preventDefault();
+    dispatch(getOrderByCreation(e.target.value));
+    //setPage(1);
+    //setOrder(e.target.value);
   }
 
   function handleAlphabetOrder(e){ 
@@ -92,12 +99,6 @@ function handleOrderByWeight(e) {
   //     setOrder(e.target.value);
   // }
 
-  function handleOrderByCreation(e) {
-    e.preventDefault();
-    dispatch(getOrderByCreation(e.target.value));
-    setPage(1);
-    setOrder(e.target.value);
-  }
 
   function handleClick(e) {
     e.preventDefault();
@@ -111,123 +112,71 @@ function handleOrderByWeight(e) {
     <div>
       {loading ? (
         <div className="loading">
-          <img className="loadingImg" src={loadingGif} alt="not found" />
+          <img  src={loadingGif} alt="not found" />
         </div>
       ) : (
         <div>
           <nav id="nav">
-            <Logo/>
-            <SearchBar/>
-            <Link to="/About">
-              <button id="About">About</button>
-            </Link>
+            <Logo className="logo"/>
+            <SearchBar className="search"/>
+
             <ul>
-              <li>
+              <ul>
                 <button
-                  className="btnStyle1"
+                  className="button1"
                   onClick={(e) => {
                     handleClick(e);
                   }}
                 >
                   Refresh
                 </button>
-              </li>
-              <li>
+                <Link to="/About">
+              <button id="About"className="button1">About</button>
+            </Link>
+              </ul>
+              <ul>
                 <Link to="/create">
-                  <button id="create">Create a new Dog</button>
+                  <button id="create" className="button1">Create a new Dog</button>
                 </Link>
-              </li>
-              <li>
-                <select onChange={(e) => {handleTemperamentFilter(e)}} className="navFilter">
+              </ul>
+              <ul>
+                <select onChange={(e) => {handleTemperamentFilter(e)}} className="filt">
                     <option value="all">Temperament filter</option>
                         {dogAllTemperaments?.map((e) => (
                     <option value={e.name} key={e.id}>{e.name}</option> 
                     ))}
                 </select>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <select
-                  key="alphaOrder"
-                  onChange={(e) => handleAlphabetOrder(e)} className="navFilter">
+                    key="alphaOrder"
+                    onChange={(e) => handleAlphabetOrder(e)} className="filt">
                   <option value={"allApi"}>Alphabet order</option>
                   <option value={"Asc"}>A to Z</option>
                   <option value={"Desc"}>Z to A</option>
                 </select>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <select
-                  onChange={(e) => handleOrderByWeight(e)} className="navFilter">
+                    onChange={(e) => handleOrderByWeight(e)} className="filt">
                   <option value="selected" hidden>Weight filter</option>
                   <option value="Asc">Heavy-Light</option>
                   <option value="Desc">Light-Heavy</option>
                 </select>
-              </li>
-              <li>
+              </ul>
+              <ul>
                 <select
-                  onChange={(e) => handleOrderByCreation(e)} className="navFilter">
-                  <option value={"all"}>All Dogs</option>
-                  <option value={"api"}>DogsFromApi</option>
+                    onChange={(e) => handleOrderByCreation(e)} className="filt">
+                  <option value="all" selected="selected">All Dogs</option>
+                  <option value="api">DogsFromApi</option>
                   <option value="created">DogsFromDb</option>
                 </select>
-              </li>
-              <li>
-              </li>
+              </ul>
             </ul>
             <div className="clear"></div>
           </nav>
-
-
-
-
-
-
-
-
-
-
-          {/* {allDogs?.length ? (
-            allDogs?.map((e) => {
-              return (
-                <div>
-                  <Link to={`/dogs/${e.id}`}>
-                    <Dog
-                      name={e.name}
-                      image={e.image}
-                      temperament={e.temperament}
-                      id={e.id}
-                      weight={e.weight}
-                    />
-                  </Link>
-                </div>
-              );
-            })
-          ) : (
-            <div className="noFoundError">
-              <h1 className="dogNotFound">The Dog has not been found</h1>
-              <img className="notFound" src={notfound} alt="notfound" />
-              <button
-                className="btnStyle2"
-                onClick={(e) => {
-                  handleClick(e);
-                }}
-              >
-                Back
-              </button>
-            </div>
-          )} */}
         </div>
-      
-      
-      
-      
-      
-      
       )}
-
-
-
-
-
     <div className="Dogs">
           <Dogs/>
         </div>
