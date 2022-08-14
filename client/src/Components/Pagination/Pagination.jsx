@@ -1,10 +1,10 @@
 import React from "react"
 import "./Pagination.css"
 
-export default function Pagination ({ dogsPerPage, allDogs, page }) {
+export default function Pagination ({ dogsPerPage, cardState, page }) {
     const pageNumbers = []
 
-    for( let i=0; i < Math.ceil(allDogs/dogsPerPage); i++) {
+    for( let i=0; i < Math.ceil(cardState/dogsPerPage); i++) {
         pageNumbers.push(i+1)
     }
     return (

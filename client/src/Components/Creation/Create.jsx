@@ -51,7 +51,7 @@ function validation(input) {
         errors.heightMax = "Max height of a dog must be a number"
     }
 
-    else if(input.heightMax > 2) {
+    else if(input.heightMax > 200) {
         errors.heightMax = "Your dog cant be taller than 2 meters"
     }
 
@@ -59,13 +59,13 @@ function validation(input) {
         errors.heightMin = "Min height of the dog is a must"
     }
 
+    else if(input.heightMin >= 0) {
+        errors.heightMin = "Your dog cant be less than 0 Cm"
+    }
+
     else if(isNaN(parseInt(input.heightMin))) {
         errors.heightMin = "Min height of a dog must be a number"
     }
-
-    // else if(input.heightMin > 0) {
-    //     errors.heightMin = "Your dog is not a worm"
-    // }
 
     else if(input.heightMin > input.heightMax) {
         errors.heightMin = "Min height cant be greater than Max height"

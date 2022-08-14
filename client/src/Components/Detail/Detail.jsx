@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDogDetail, deleteDog } from "../../redux/actions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import defaultImage from "./Style/defaultDog.jpg";
 import loadingGif from "../Home/Styles/loadingGif.gif";
 //import dogTemp from "./Temp"
@@ -15,7 +15,6 @@ export default function Detail() {
   const dogDetails = useSelector(state => state.dogDetail);
   const loading = useSelector((state) => state.loading);
 
-  // const history = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
