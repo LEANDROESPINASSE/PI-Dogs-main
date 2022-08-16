@@ -1,105 +1,51 @@
+.body{
+    position: relative;
+    background-image: url(./Styles/2.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    border: none;
+}
+
 .button1 {
     position: relative;
     border: none;
     text-shadow: 0px 0px 20px black;
-    align-items: center;
-    margin-right: 2000px;
     width:200px;
     font-size: 20px;
     background-color: transparent;
     cursor: pointer;
 }
 
-.button2 {
-    position: relative;
-    border: none;
-    text-shadow: 0px 0px 20px black;
-    align-items: center;
-    margin-right: 2000px;
-    width:200px;
-    font-size: 20px;
-    background-color: transparent;
-    cursor: pointer;
-}
 
-.button2 {
+.search {
     position: relative;
-    border: none;
-    text-shadow: 0px 0px 20px black;
-    align-items: center;
     margin-top: 10px;
-    margin-right: 1150px;
-    width:100px;
+    margin-left: 1px;
+    right: 1px;
+    font-weight: 600;
     font-size: 20px;
-    background-color: transparent;
-    cursor: pointer;
+
+
 }
 
-body{
+.filter {
     position: relative;
-    background-image: url(./Styles/homeBackround.jpg);
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-position:right;
-}
-
-.filt {
-    position: relative;
-    left: 10vw;
-    background-color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 1vh;
-    width: 20px;
-    height: 5vh;
-    color: rgb(255, 255, 255);
-    font-style: trebuchet;
+    margin-top: 10px;
+    margin-left: 1px;
+    right: 1px;
+    font-weight: 600;
     font-size: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-.btnDetail1{
- 
-    margin-left: -150px;
-    height: 28px;
-    border: 2px solid black;
-    background-color: rgb(255, 166, 0) ;
-    border-radius: 8px;
-    width: 100px;
-    font-size:medium;
-    border-width: 2px;
-    cursor: pointer;
-  }
-  
-  .imgNotFound{
-      width: 200px;
-      height: 200px;
-      margin-left: 550px ;
-      margin-top: 2px;
-      margin-bottom: 30px;
-  }
-  
-  
-  .dogNotFpund{
-      font-family: Arial, Helvetica, sans-serif;
-      text-shadow: 0px 0px 2px white;
-      font-size: 40px;
-      text-align: left ;
-      color: rgb(35, 34, 34);
-      padding-top: 80px;
-      margin-left: 450px ;
-      margin-top: 2px;
-      margin-bottom: 10px;
-  }
-  
-.loading{
-    background-color: black;
+.father {
+    text-align: center; 
 }
+
+.child {
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+
+
+

@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { getAllDogs, deleteDog } from "../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 //import defaultImage from "./Style/defaultDog.jpg";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "./Pagination";
 import Dog from "../Dog/Dog"
 
 // function dogTemperament(temperaments) {
@@ -54,33 +54,34 @@ function handleDelete(element) {
   }
 }  
 
+
   return (
     <div>
         <div id="detailCard">          
           <div className="detailOrder">
             {currentDetails.map( (dogs) => {
                   return (
-                      <div key={dogs.id} >
-                          <Link to={"/dogs/" + dogs.id} className="detail">
+                      <div className="card" key={dogs.id} >
+                          <Link to={"/dogs/" + dogs.id} className="button2">
                               <Dog 
                                 name={dogs.name} 
                                 image={dogs.image} 
                                 temperament={dogs.temperament} 
                                 id={dogs.id}
                                 weight={dogs.weight} /> 
-                                  <Link to="/home">
-                                      <button className="detailButton"
+                                  {/* <Link to="/home">
+                                      <button className="lettersB"
                                         onClick={(e) => handleDelete(e)}>
                                           Delete
                                       </button>
-                                  </Link>
+                                  </Link> */}
                           </Link>
                       </div>
                   )}               
               )}           
             </div>
-          <div className="paginaterOrder">
-          <Pagination  dogsPerPage={dogsPerPage} cardState= {cardState.length} page={page} />
+          <div className="numbers">
+          <Pagination dogsPerPage={dogsPerPage} cardState= {cardState.length} page={page} />
           </div>
         </div>
     </div>

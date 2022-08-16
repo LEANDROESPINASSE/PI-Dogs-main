@@ -1,5 +1,5 @@
 import React from "react"
-import "./Pagination.css"
+import "./Dogs.css"
 
 export default function Pagination ({ dogsPerPage, cardState, page }) {
     const pageNumbers = []
@@ -8,10 +8,11 @@ export default function Pagination ({ dogsPerPage, cardState, page }) {
         pageNumbers.push(i+1)
     }
     return (
-        <div id="pagination">
-            <br />
+        <div className="paginado1"> 
             { pageNumbers && pageNumbers.map(number => (
-                <button onClick={() => page(number)} id="buttonPage">{number}</button>
+                <ul key={number}
+                    className="numbers1"> <button onClick={() => page(number)} className="buttonnumber">{number}</button>
+                </ul>
             ))}
         </div>
     )

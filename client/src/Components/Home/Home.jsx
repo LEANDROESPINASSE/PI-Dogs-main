@@ -47,15 +47,15 @@ const [page, setPage] = useState(1);
   function handleTemperamentFilter(e) {
     e.preventDefault();
     dispatch(getTemperamentFilter(e.target.value));
-    //setPage(1);
-    //setOrder(e.target.value);
+    setPage(1);
+    setOrder(e.target.value);
   }
   
   function handleOrderByCreation(e) {
     e.preventDefault();
     dispatch(getOrderByCreation(e.target.value));
-    //setPage(1);
-    //setOrder(e.target.value);
+    setPage(1);
+    setOrder(e.target.value);
   }
 
   function handleAlphabetOrder(e){ 
@@ -111,36 +111,37 @@ function handleOrderByWeight(e) {
   return (
     <div>
       {loading ? (
-        <div className="loading">
-          <img  src={loadingGif} alt="not found" />
+        <div>
+          <img src={loadingGif} alt="not found" />
         </div>
       ) : (
-        <div>
-          <nav id="nav">
+        <div className="homeback">
+          <nav>
             <Logo className="logo"/>
             <SearchBar className="search"/>
 
-            <ul>
-              <ul>
-                <button
-                  className="button1"
-                  onClick={(e) => {
-                    handleClick(e);
-                  }}
-                >
-                  Refresh
-                </button>
-                <Link to="/About">
-              <button id="About"className="button1">About</button>
-            </Link>
-              </ul>
-              <ul>
+
+
+            <div className="first">
+              <div className="child">
+                <button className="button1" onClick={(e) => {handleClick(e);}}>Refresh</button>
+              </div>
+              <div className="child">
                 <Link to="/create">
-                  <button id="create" className="button1">Create a new Dog</button>
+                    <button id="create" className="button1">Create a new Dog</button>
                 </Link>
-              </ul>
+              </div>
+              <div className="child">
+                <Link to="/About">
+                  <button id="About"className="button1">About</button>
+                </Link>
+                </div>
+              </div>
+
+
+
               <ul>
-                <select onChange={(e) => {handleTemperamentFilter(e)}} className="filt">
+                <select onChange={(e) => {handleTemperamentFilter(e)}} className="filter">
                     <option value="all">Temperament filter</option>
                         {dogAllTemperaments?.map((e) => (
                     <option value={e.name} key={e.id}>{e.name}</option> 
@@ -150,7 +151,7 @@ function handleOrderByWeight(e) {
               <ul>
                 <select
                     key="alphaOrder"
-                    onChange={(e) => handleAlphabetOrder(e)} className="filt">
+                    onChange={(e) => handleAlphabetOrder(e)} className="filter">
                   <option value={"allApi"}>Alphabet order</option>
                   <option value={"Asc"}>A to Z</option>
                   <option value={"Desc"}>Z to A</option>
@@ -158,7 +159,7 @@ function handleOrderByWeight(e) {
               </ul>
               <ul>
                 <select
-                    onChange={(e) => handleOrderByWeight(e)} className="filt">
+                    onChange={(e) => handleOrderByWeight(e)} className="filter">
                   <option value="selected" hidden>Weight filter</option>
                   <option value="Asc">Heavy-Light</option>
                   <option value="Desc">Light-Heavy</option>
@@ -166,18 +167,18 @@ function handleOrderByWeight(e) {
               </ul>
               <ul>
                 <select
-                    onChange={(e) => handleOrderByCreation(e)} className="filt">
-                  <option value="all" selected="selected">All Dogs</option>
+                    onChange={(e) => handleOrderByCreation(e)} className="filter">
+                  <option value="all" defaultValue="all">All Dogs</option>
                   <option value="api">DogsFromApi</option>
                   <option value="created">DogsFromDb</option>
                 </select>
               </ul>
-            </ul>
+            
             <div className="clear"></div>
           </nav>
         </div>
-      )}
-    <div className="Dogs">
+          )}
+        <div>
           <Dogs/>
         </div>
     </div>

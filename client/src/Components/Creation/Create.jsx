@@ -160,13 +160,13 @@ export default function CreateDog() {
         if(Object.values(errors).length >0) {
             alert("Please may you fill the form correctly")
         } else if(
-            input.name === "",
-            input.weightMax === "",
-            input.weightMin === "",
-            input.heightMax === "",
-            input.heightMin === "",
-            input.lifeSpanMax === "",
-            input.lifeSpanMin === "",
+            input.name.trim().length === 0,
+            input.weightMax.trim().length === 0,
+            input.weightMin.trim().length === 0,
+            input.heightMax.trim().length === 0,
+            input.heightMin.trim().length === 0,
+            input.lifeSpanMax.trim().length === 0,
+            input.lifeSpanMin.trim().length === 0,
             input.temperament.length === 0
         ) {
             alert("Please complete correctly the form")
@@ -198,95 +198,95 @@ export default function CreateDog() {
 
         return (
 
-            <div className="createDog">
+            <div className="back">
                 <h1 className="tittle">Create your own Dog</h1>
                     <form onSubmit={e => handleSubmit(e)} id="form">
-            <ul>
-                <li>
-                    <label>The name of your dog is...</label>
-                    <input type="text" value={input.name} name="name" onChange={e => handleChange(e)} />
+            <div className="createdog" >
+                <p>
+                    <label className="createdog" >The name of your dog is...</label>
+                    <input type="text" value={input.name} name="name"  className="dots" onChange={e => handleChange(e)} />
                     {errors.name && (
                         <p className="error">{errors.name}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Max Weight of your dog in Kg is...</label>
-                    <input type="text" value={input.weightMax} name="weightMax" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog">The Max Weight of your dog in Kg is...</label>
+                    <input type="text" value={input.weightMax} name="weightMax" className="dots" onChange={e => handleChange(e)} />
                     {errors.weightMax && (
                         <p className="error">{errors.weightMax}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Min Weight of your dog in Kg is...</label>
-                    <input type="text" value={input.weightMin} name="weightMin" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >The Min Weight of your dog in Kg is...</label>
+                    <input type="text" value={input.weightMin} name="weightMin" className="dots" onChange={e => handleChange(e)} />
                     {errors.weightMin && (
                         <p className="error">{errors.weightMin}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Max Height of your dog in Cm is...</label>
-                    <input type="text" value={input.heightMax} name="heightMax" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >The Max Height of your dog in Cm is...</label>
+                    <input type="text" value={input.heightMax} name="heightMax" className="dots" onChange={e => handleChange(e)} />
                     {errors.heightMax && (
                         <p className="error">{errors.heightMax}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Min Height of your dog in Cm is...</label>
-                    <input type="text" value={input.heightMin} name="heightMin" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >The Min Height of your dog in Cm is...</label>
+                    <input type="text" value={input.heightMin} name="heightMin" className="dots" onChange={e => handleChange(e)} />
                     {errors.heightMin && (
                         <p className="error">{errors.heightMin}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Max life expectancy of your Dog is...</label>
-                    <input type="text" value={input.lifeSpanMax} name="lifeSpanMax" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >The Max life expectancy of your Dog is...</label>
+                    <input type="text" value={input.lifeSpanMax} name="lifeSpanMax" className="dots" onChange={e => handleChange(e)} />
                     {errors.lifeSpanMax && (
                         <p className="error">{errors.lifeSpanMax}</p>
                     )}
-                </li>
-                <li>
-                    <label>The Min life expectancy of your Dog is...</label>
-                    <input type="text" value={input.lifeSpanMin} name="lifeSpanMin" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >The Min life expectancy of your Dog is...</label>
+                    <input type="text" value={input.lifeSpanMin} name="lifeSpanMin" className="dots" onChange={e => handleChange(e)} />
                     {errors.lifeSpanMin && (
                         <p className="error">{errors.lifeSpanMin}</p>
                     )}
-                </li>
-                <li>
-                    <label>Upload an image for your Dog</label>
-                    <input type="text" value={input.image} name="image" onChange={e => handleChange(e)} />
+                </p>
+                <p>
+                    <label className="createdog" >Upload an image for your Dog</label>
+                    <input type="text" value={input.image} name="image" className="dots" onChange={e => handleChange(e)} />
                     {errors.image && (
                         <p className="error">{errors.image}</p>
                     )}
-                </li>
-                <li>
-                    <select onChange={e => handleSelect(e)} id="temp">
-                        <option value="selected" hidden>Temperaments</option>
+                </p>
+                <p>
+                    <select  className="createdog" onChange={e => handleSelect(e)} id="temp">
+                        <option value="selected" className="createdog" >Temperaments</option>
                         {allTemperament?.sort(function(a, b){
                             if(a.name < b.name) return -1
                             if(a.name > b.name) return 1
                             return 0
                         }).map(temp => {
                             return (
-                                <option value={temp.name} key={temp.id}>{temp.name}</option>
+                                <option className="dots" value={temp.name} key={temp.id}>{temp.name}</option>
                             )
                         })}
                     </select>
-                </li>
-                <li>
+                </p>
+                <p>
                     {input.temperament.map(element =>
                     <div>
                         <h5>
                             {element}
-                            <button onClick={() => handleDelete(element)} className="deleteButtton">X</button>
+                            <button onClick={() => handleDelete(element)} className="createdog">X</button>
                         </h5>
                     </div>
                     )}
-                </li>
-            </ul>
+                </p>
+            </div>
 
-            <div className="buttonC">
-                <Link to="/home"><button className="buttonH">Back</button></Link>
-                <button type="submit" className="buttonS" id="buttonCreate"><strong>Create</strong></button>
+            <div>
+                <Link to="/home"><button className="lettersB">Back</button></Link>
+                <button type="submit" className="lettersB" >Create Dog</button>
             </div>
             </form>
             </div>

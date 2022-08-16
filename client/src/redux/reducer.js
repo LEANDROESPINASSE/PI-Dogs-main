@@ -3,7 +3,8 @@ const initialState = {
     dogs: [],
     allDogs: [],
     allTemperaments: [],
-    dogDetail: []
+    dogDetail: [],
+
 }
 
 function rootReducer(state = initialState, action) {
@@ -21,6 +22,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 dogs: [...action.payload],
                 allDogs: [...action.payload],
+            
             }
         
         case "GET_DOGS_TEMPERAMENT":
@@ -31,23 +33,53 @@ function rootReducer(state = initialState, action) {
 
         case "GET_TEMPERAMENT_FILTERED":
 
-            const allDogs = state.allDogs
-            const filtered = action.payload === 'all' ? allDogs 
-            : allDogs.filter(e => { 
-                if (e.temperament) {
-                    return e.temperament.includes(action.payload);
-                } else if (e.temperament) {
-                    let temps = e.temperament.map(e => e.name);
-                    return temps.includes(action.payload);
+            const filteredDogs = state.allDogs.filter(dog => dog.temperament.includes(action.payload))
+
+            const perroculiao = {
+                name: "perroculiao",
+                temperaments: "hola",
+                weight: "pesado",
+            }
+            
+            if(!filteredDogs) {
+                return {
+                    ...state,
+                    dogs: perroculiao,
+                    allDogs: perroculiao,
                 }
-                return true;
-            });
+            }
 
             return {
                 ...state,
-                dogs: filtered
-            };
+                allDogs: filteredDogs,
+                dogs: filteredDogs,
+            }
 
+            // const filteredDogs = state.allDogs.filter(e => e.temperament.split(",").includes(action.payload))
+            //     if(!filteredDogs) return "error getting dogs filtered"
+
+            //     return {
+            //         ...state,
+            //         dogs: filteredDogs,
+            //         allDogs: filteredDogs,
+            //     }
+
+            // const allDogs = state.allDogs
+            // const filtered = action.payload === 'all' ? allDogs 
+            // : allDogs.filter(e => { 
+            //     if (e.temperament) {
+            //         return e.temperament.includes(action.payload);
+            //     } else if (e.temperament) {
+            //         let temps = e.temperament.map(e => e.name);
+            //         return temps.includes(action.payload);
+            //     }
+            //     return true;
+            // });
+
+            // return {
+            //     ...state,
+            //     dogs: filtered
+            // };
 
             // const filterTemp = state.allDogs.filter(dog => {
             //     if (!dog.temperaments) return undefined;
@@ -77,6 +109,8 @@ function rootReducer(state = initialState, action) {
         //     ...state,
         //     dogs: action.payload === "all" ? newDog : newDogFiltered,
         // }
+
+        
 
         case "GET_ABC_ORDERED":
 
@@ -176,7 +210,8 @@ function rootReducer(state = initialState, action) {
         case "GET_DOGS_BY_NAME":
             return {
                 ...state,
-                dogs: action.payload
+                dogs: action.payload,
+                allDogs: action.payload
             }
 
         case "GET_DOG_DETAIL":
@@ -184,6 +219,12 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 dogDetail: action.payload
             }
+
+            case "CLEAR_DOG_CACHE": 
+                return {
+                    ...state,
+                    dogDetail: []
+                }
 
         case "DELETE_DOG":
             return {

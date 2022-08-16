@@ -19,26 +19,24 @@ export default function Dog({
     weight
 }) {
   return (
-    <div id="card">
-      <h1 id="cardTittle">{name}</h1>
+    <div>
+      <h1 className="dogname">{name}</h1>
       {image ? (
-        <img id="cardImg" width={"200px"} src={image} alt="dogImg" />
+        <img className="image" src={image} alt="dogImg" />
       ) : (
-        <img id="cardImg" src={defaultImage} alt="dogImg" />
+        <img src={defaultImage} alt="dogImg" />
       )}
       {temperament ? (
-        <h4 id="h4">Temperament: {temperament}</h4>
+        <h4 className="dogname">Dog temperaments: {temperament}.</h4>
       ) : (
         <h4>Not temperament found</h4>
       )}
       {weight ? (
-      <h4 id="h4">
-        weight between: {weight} Kg
+      <h4 className="dogname">Weight between: {weight} Kg
       </h4>
       ) : (
-      <h4>Weight Not found</h4>
+      <h4 className="dogname">Weight Not found</h4>
       )}
-    </div>
-      
+    </div>     
   );
 }

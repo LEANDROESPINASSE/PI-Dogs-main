@@ -1,12 +1,33 @@
+.aboutback{
+        position: relative;
+        background-image: url(./4.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
 .about {
+        position: relative;
         border: none;
-        text-shadow: 0px 0px 20px black;
+        text-shadow: 50px 80px 1000px black;
         align-items: center;
-        margin-right: 2000px;
-        margin-left: 70px;
-        margin-top: 20px;
-        width:200px;
-        font-size: 20px;
+        width:300px;
+        font-size: 30px;
         background-color: transparent;
         cursor: pointer;
+}
+
+.tittle{
+        font-family: Arial;
+        text-shadow: 0px 0px 3px black;
+        font-size: 120px;
+        color: white;
+        text-align: center;
+}
+
+.text {
+        color: rgb(0, 0, 0);
+        font-family: Arial;
+        font-size: 30px;    
+        margin-bottom: 70px; 
+
 }

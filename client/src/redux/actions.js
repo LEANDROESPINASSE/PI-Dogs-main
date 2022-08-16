@@ -20,7 +20,7 @@ export function getAllDogs() {
                 payload: allDogs.data
             })
         } catch(error) {
-            console.log("Error getting all dogs", error)
+            alert("Error getting all dogs", error)
         }
     }
 }
@@ -48,7 +48,8 @@ export function getDogByName(name) {
                 payload: dogsByName.data
             })
         } catch(error) {
-            console.log("Error getting dogs by name", error)
+            alert("Error getting dogs by name", error)
+            
         }   
     }
 }
@@ -77,7 +78,7 @@ export function createDog(payload) {
             payload: createDog.data
         })
         } catch(error) {
-            console.log("Error creating a new dog", error)
+            alert("Error creating a new dog", error)
         }
     }
 }
@@ -93,7 +94,7 @@ export function getAllTemperament() {
                 payload: allTemperaments.data
             })
         }catch(error) {
-            console.log("Error getting all the temperaments", error)
+            alert("Error getting all the temperaments", error)
         }
     }
 }
@@ -122,7 +123,7 @@ export function getDogDetail(id) {
             payload: dogDetail.data
         })
         } catch(error) {
-            console.log("Error gettig dog by ID", error)
+            alert("Error gettig dog by ID", error)
         }
     }
 }
@@ -199,6 +200,13 @@ export function getDogDetail(id) {
 //         }
 // }
 
+    // export function setCurrentPage(payload) {
+    //     return {
+    //         payload,
+    //         type: "SET_CURRENT_PAGE",
+    //     }
+    // }
+
 //--------------------- RENDER/CREATION/ORDER --------------------------
 
     export function getOrderByCreation(payload) {
@@ -220,14 +228,20 @@ export function deleteDog(id) {
                 payload: deleteDog.data
             })
         } catch(error) {
-            console.log("Error deleting the dog", error)
+            alert("Error deleting the dog", error)
         }
     }
 }
 
 export function orderByWeight(payload) {
     return {
-      type: "ORDER_BY_WEIGHT",
-      payload,
+        type: "ORDER_BY_WEIGHT",
+        payload,
     };
-  }
+}
+
+export const clearDogCache = () => {
+    return {
+        type: "CLEAR_DOG_CACHE"
+    }
+}

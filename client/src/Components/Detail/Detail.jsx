@@ -3,10 +3,12 @@ import "./Detail.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDogDetail, deleteDog } from "../../redux/actions";
+import { getDogDetail, deleteDog, clearDogCache } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import defaultImage from "./Style/defaultDog.jpg";
 import loadingGif from "../Home/Styles/loadingGif.gif";
+
+
 //import dogTemp from "./Temp"
 
 
@@ -19,6 +21,9 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getDogDetail(id));
+    return () => {
+      dispatch(clearDogCache())
+    }
   }, [dispatch, id]);
 
   // console.log(dogDetail);
@@ -35,38 +40,39 @@ export default function Detail() {
   // }
 
   return (
-    <div>
-      {loading ? (
+    <div key={id}>
+      {dogDetails.length === 0 ? (
         <div className="loading"> <img src={loadingGif} alt="loading" /></div>
       ) : (
-        <div id="detailCard">
-          <h1 id="tittle">{dogDetails.name}</h1>
+        <div className="body">
+          <h1 className="detailname">{dogDetails.name}</h1>
           {dogDetails.image ? (
-            <img src={dogDetails.image} alt="Dog image" id="imgDetail" />
+            <div>
+            <img src={dogDetails.image} className="image" alt="Dog image" />
+            </div>
           ) : (
             <img id="imgDetail" src={defaultImage} alt="dogImg" />
           )}
           <div>
             {dogDetails.temperament ? (
-              <p>Temperaments: {dogDetails.temperament}</p>
+              <p className="letters">Dog temperaments: {dogDetails.temperament}.</p>
             ) : (
-              <p>Temperaments not found</p>
+              <p className="letters">Temperaments not found</p>
             )}
-            <p>Weight in Kg: {dogDetails.weight}</p>
+            <p className="letters">Weight in Kg: {dogDetails.weight}</p>
 
-            <p>Height in Cm: {dogDetails.height}</p>
+            <p className="letters">Height in Cm: {dogDetails.height}</p>
 
-            <p>Life expectancy: {dogDetails.lifeSpan}</p>
-
+            <p className="letters">Life expectancy: {dogDetails.lifeSpan}</p>
           </div>
           <Link to="/home">
             {/* <button className="detailButton" onClick={(e) => handleDelete(e)}>
               Delete
             </button> */}
-            <button className="detailButton">Back</button>
+            <button className="lettersB" >Back</button>
           </Link>
         </div>
-      )}{" "}
+      )}
     </div>
   );
 }

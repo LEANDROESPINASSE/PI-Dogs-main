@@ -1,0 +1,13 @@
+.image {
+    width: 70%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.dogname {
+    color: azure;
+}
+
+.txt {
+    font-size: 30%;
+}
